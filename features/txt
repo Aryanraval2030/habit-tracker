@@ -1,0 +1,76 @@
+Basic Features (Must Have) = 
+User Signup & Login
+Add Habit
+Set Time for Habit
+Mark Habit as Done / Not Done
+Daily Habit Tracking
+
+Core Features (Important) = 
+Streak System
+Edit Habit
+Delete Habit
+Multiple Habits per User
+Habit History (past records)
+
+Advanced Features (Optional but Powerful) =
+Reminder / Notification
+Progress / Analytics (success rate)
+Habit Categories
+Weekly / Monthly View
+Custom Frequency (daily / weekly)
+
+
+
+
+
+
+-----------------------------
+
+front-end
+frontend/
+│
+├── public/
+│   └── index.html
+│
+├── src/
+│   ├── components/
+│   │   ├── HabitForm.jsx
+│   │   ├── HabitList.jsx
+│   │   └── HabitItem.jsx
+│   │
+│   ├── services/
+│   │   └── api.js
+|
+├── pages/
+│       └── Hero.jsx
+│   
+│   ├── App.jsx    
+│   ├── main.jsx
+│   └── index.css
+│
+├── package.json
+└── tailwind.config.js
+
+---------------------------
+back-end
+
+backend/
+│
+├── models/
+│   ├── User.js
+│   └── Habit.js
+│
+├── routes/
+│   ├── userRoutes.js
+│   └── habitRoutes.js
+│
+├── controllers/
+│   ├── userController.js
+│   └── habitController.js
+│
+├── config/
+│   └── db.js
+│
+├── server.js
+├── .env
+└── package.json
