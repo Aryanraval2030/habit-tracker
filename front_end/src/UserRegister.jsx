@@ -2,8 +2,8 @@ function UserRegister({ show, setShow }) {
   if (!show) return null;
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-      <div className="shadow-[0_0_8px_rgba(99,102,241,0.2)] bg-black  w-full max-w-md p-6 rounded-2xl">
-        <h2 className="text-2xl text-white font-bold text-center mb-2">
+      <div className="shadow-[0_0_8px_rgba(255,255,255,0.6)] bg-[rgba(255,255,255,0.6)]  w-full max-w-md p-6 rounded-2xl">
+        <h2 className="text-2xl text-black font-bold text-center mb-2">
           Welcome 👋
         </h2>
 
