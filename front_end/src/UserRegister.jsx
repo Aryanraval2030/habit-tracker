@@ -1,36 +1,40 @@
 function UserRegister({ show, setShow }) {
   if (!show) return null;
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm">
-      <div className="bg-white w-full max-w-md p-6 rounded-2xl shadow-xl">
-        <h2 className="text-2xl font-bold text-center mb-2">Welcome 👋</h2>
+    <div className="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+      <div className="shadow-[0_0_8px_rgba(99,102,241,0.2)] bg-black  w-full max-w-md p-6 rounded-2xl">
+        <h2 className="text-2xl text-white font-bold text-center mb-2">
+          Welcome 👋
+        </h2>
 
         <p className="text-center text-gray-500 mb-5">Create your account</p>
 
-        <input
-          type="text"
-          placeholder="Name"
-          className="w-full border p-3 rounded-lg mb-3"
-        />
+        <form action="" className="flex flex-col gap-4">
+          <input
+            type="text"
+            placeholder="Name"
+            className="shadow-[0_0_10px_rgba(168,85,247,0.3)] border-none text-white w-full border p-3 rounded-lg mb-3 bg-black"
+          />
 
-        <input
-          type="email"
-          placeholder="Email"
-          className="w-full border p-3 rounded-lg mb-3"
-        />
+          <input
+            type="email"
+            placeholder="Email"
+            className="shadow-[0_0_10px_rgba(168,85,247,0.3)] border-none text-white w-full border p-3 rounded-lg mb-3 bg-black"
+          />
 
-        <input
-          type="password"
-          placeholder="Password"
-          className="w-full border p-3 rounded-lg mb-4"
-        />
+          <input
+            type="password"
+            placeholder="Password"
+            className="shadow-[0_0_10px_rgba(168,85,247,0.3)] border-none text-white w-full border p-3 rounded-lg mb-3 bg-black"
+          />
 
-        <button
-          className="w-full bg-blue-500 text-white py-3 rounded-lg"
-          onClick={() => setShow(false)}
-        >
-          Register
-        </button>
+          <button
+            className="w-full bg-blue-950 text-white font-bold  py-3 rounded-lg"
+            onClick={() => setShow(false)}
+          >
+            Register
+          </button>
+        </form>
       </div>
     </div>
   );
