@@ -8,24 +8,6 @@ function AddHabits() {
   return (
     <div className="flex justify-center pt-9 bg-black h-screen text-white">
       <div className="h-[70vh] gap-4 grid grid-cols-3 w-fit pt-[2%] pb-[2%] pl-[2%] pr-[2%]">
-        {/* <div className="shadow-[0_0_10px_rgba(59,130,246,0.5)] h-[80px] w-[140px] rounded-2xl"></div>
-        <div className="shadow-[0_0_10px_rgba(59,130,246,0.5)] h-[80px] w-[140px] rounded-2xl"></div>
-        <div className="shadow-[0_0_10px_rgba(59,130,246,0.5)] h-[80px] w-[140px] rounded-2xl"></div>
-        <div className="shadow-[0_0_10px_rgba(59,130,246,0.5)] h-[80px] w-[140px] rounded-2xl"></div>
-        <div className="shadow-[0_0_10px_rgba(59,130,246,0.5)] h-[80px] w-[140px] rounded-2xl"></div>
-        <div className="shadow-[0_0_10px_rgba(59,130,246,0.5)] h-[80px] w-[140px] rounded-2xl"></div>
-        <div className="shadow-[0_0_10px_rgba(59,130,246,0.5)] h-[80px] w-[140px] rounded-2xl"></div>
-        <div className="shadow-[0_0_10px_rgba(59,130,246,0.5)] h-[80px] w-[140px] rounded-2xl"></div>
-        <div className="shadow-[0_0_10px_rgba(59,130,246,0.5)] h-[80px] w-[140px] rounded-2xl"></div>
-        <div className="shadow-[0_0_10px_rgba(59,130,246,0.5)] h-[80px] w-[140px] rounded-2xl"></div>
-        <div className="shadow-[0_0_10px_rgba(59,130,246,0.5)] h-[80px] w-[140px] rounded-2xl"></div>
-        <div className="shadow-[0_0_10px_rgba(59,130,246,0.5)] h-[80px] w-[140px] rounded-2xl"></div>
-        <div className="shadow-[0_0_10px_rgba(59,130,246,0.5)] h-[80px] w-[140px] rounded-2xl"></div>
-        <div className="shadow-[0_0_10px_rgba(59,130,246,0.5)] h-[80px] w-[140px] rounded-2xl"></div>
-        <div className="shadow-[0_0_10px_rgba(59,130,246,0.5)] h-[80px] w-[140px] rounded-2xl"></div>
-        <div className="shadow-[0_0_10px_rgba(59,130,246,0.5)] h-[80px] w-[140px] rounded-2xl"></div>
-        <div className="shadow-[0_0_10px_rgba(59,130,246,0.5)] h-[80px] w-[140px] rounded-2xl"></div>
-        <div className="shadow-[0_0_10px_rgba(59,130,246,0.5)] h-[80px] w-[140px] rounded-2xl"></div> */}
         {habits.map((habit) => (
           <div
             key={habit.id}
