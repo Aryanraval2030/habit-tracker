@@ -13,7 +13,7 @@ function App() {
     }
   }, []);
 
-  const [page, setPage] = useState("hero");
+  const [page, setPage] = useState("register");
   return (
     <div className="font-serif  min-h-screen">
       {/* <UserRegister show={showPopup} setShow={setShowPopup} /> */}
