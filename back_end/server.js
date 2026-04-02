@@ -7,40 +7,53 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+// ✅ Schema with unique email
 const userSchema = new mongoose.Schema({
   name: String,
-  email: String,
+  email: {
+    type: String,
+    unique: true, // 🔥 duplicate rokega
+  },
   password: String,
 });
 
-const Habit = mongoose.model("register", userSchema);
+const User = mongoose.model("User", userSchema);
 
+// ✅ REGISTER API
 app.post("/register", async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
-    const newHabit = new Habit({
+    // 🔍 check existing user
+    const existingUser = await User.findOne({ email });
+
+    if (existingUser) {
+      return res.status(400).send("User already registered");
+    }
+
+    const newUser = new User({
       name,
       email,
       password,
     });
 
-    await newHabit.save();
+    await newUser.save();
 
-    res.send("user saved and registed!");
+    res.status(200).send("User registered successfully!");
   } catch (error) {
-    res.send("Error: " + error.message);
+    res.status(500).send("Error: " + error.message);
   }
 });
 
+// ✅ MongoDB connect
 mongoose
   .connect(
     "mongodb+srv://aryan2030:aryan682007@cluster0.wcopjgy.mongodb.net/habitTracker",
   )
-  .then(() => console.log("connected atlas"))
-  .catch((err) => console.log("error here.. ", err));
+  .then(() => console.log("MongoDB connected"))
+  .catch((err) => console.log("DB error:", err));
 
-
-  app.listen("3001",()=>{
-    console.log("server is runnig.")
-  })
+// ✅ Server start
+app.listen(3001, () => {
+  console.log("Server running on port 3001");
+});

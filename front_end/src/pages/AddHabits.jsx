@@ -17,7 +17,7 @@ import {
   FaChild,
 } from "react-icons/fa";
 
-function AddHabits() {
+function AddHabits({setPage}) {
   const [selected, setSelected] = useState([]); // store selected habit ids
 
   const habits = [
@@ -61,16 +61,26 @@ function AddHabits() {
     );
   };
 
+  const [customHabits, setCustomHabits] = useState([{ title: "", time: "" }]);
+  const addNewHabit = () => {
+    setCustomHabits([...customHabits, { title: "", time: "" }]);
+  };
+  const handleChange = (index, field, value) => {
+    const updated = [...customHabits];
+    updated[index][field] = value;
+    setCustomHabits(updated);
+  };
+
   return (
-    <div className="flex justify-center pt-9 bg-black h-screen text-white">
-      <div className="h-[70vh] gap-4 grid grid-cols-3 w-fit pt-[2%] pb-[2%] pl-[2%] pr-[2%]">
+    <div className="flex bg-black justify-center pt-9 min-h-screen border-white text-white">
+      <div className="gap-4 grid grid-cols-3 w-fit pt-[2%] pb-[2%] pl-[2%] pr-[2%]">
         {habits.map((habit) => {
           const isSelected = selected.includes(habit.id);
           return (
             <div
               key={habit.id}
               onClick={() => handleClick(habit.id)}
-              className={`flex flex-col items-center justify-center shadow-[0_0_10px_rgba(59,130,246,0.5)] h-[80px] w-[140px] rounded-2xl cursor-pointer transition-all duration-200
+              className={`flex flex-col items-center justify-center shadow-[0_0_10px_rgba(59,130,246,0.5)] h-[80px] w-[140px] rounded-2xl cursor-pointer transition-all duration-0
                 ${isSelected ? "border-2 border-blue-95000" : "bg-black"}`}
             >
               {habit.icon}
@@ -78,11 +88,46 @@ function AddHabits() {
             </div>
           );
         })}
+        {/* <div className=" col-span-3">
+          <input
+            type="text"
+            className="w-full bg-black text-white shadow-[0_0_10px_rgba(59,130,246,0.5)] rounded-md px-2 py-3"
+            placeholder=" ADD YOUR CUSTUM HABIT + TIME WITH  + TICK-MARK"
+          />
+        </div> */}
+        <div className="col-span-3 space-y-3">
+          {customHabits.map((habit, index) => (
+            <div key={index} className="flex gap-2">
+              <input
+                type="text"
+                placeholder="Habit (e.g. Wake up)"
+                value={habit.title}
+                onChange={(e) => handleChange(index, "title", e.target.value)}
+                className="w-1/2 bg-black text-white shadow-[0_0_10px_rgba(59,130,246,0.5)] px-2 py-2 rounded-md"
+              />
+
+              <input
+                type="time"
+                value={habit.time}
+                onChange={(e) => handleChange(index, "time", e.target.value)}
+                className="w-1/2 bg-black text-white shadow-[0_0_10px_rgba(59,130,246,0.5)] px-2 py-2 rounded-md"
+              />
+            </div>
+          ))}
+
+          <button onClick={addNewHabit} className="text-blue-400 mt-2">
+            + Add Custom Habit
+          </button>
+        </div>
+
         <div className="col-span-3 flex gap-10 justify-center mt-4">
           <button className="text-xl shadow-[0_0_10px_rgba(168,85,247,0.5)] px-8 py-4 rounded-xl">
             cancel
           </button>
-          <button className="text-xl shadow-[0_0_10px_rgba(168,85,247,0.5)] px-8 py-4 rounded-xl">
+          <button
+            onClick={() => setPage("hero")}
+            className="text-xl shadow-[0_0_10px_rgba(100,100,200,0.5)] px-8 py-4 rounded-xl"
+          >
             add habits
           </button>
         </div>
