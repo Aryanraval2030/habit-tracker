@@ -88,13 +88,6 @@ function AddHabits({setPage}) {
             </div>
           );
         })}
-        {/* <div className=" col-span-3">
-          <input
-            type="text"
-            className="w-full bg-black text-white shadow-[0_0_10px_rgba(59,130,246,0.5)] rounded-md px-2 py-3"
-            placeholder=" ADD YOUR CUSTUM HABIT + TIME WITH  + TICK-MARK"
-          />
-        </div> */}
         <div className="col-span-3 space-y-3">
           {customHabits.map((habit, index) => (
             <div key={index} className="flex gap-2">
