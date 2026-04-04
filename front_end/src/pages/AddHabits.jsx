@@ -17,7 +17,7 @@ import {
   FaChild,
 } from "react-icons/fa";
 
-function AddHabits({setPage}) {
+function AddHabits({ setPage, setSelectedHabits }) {
   const [selected, setSelected] = useState([]); // store selected habit ids
 
   const habits = [
@@ -88,6 +88,13 @@ function AddHabits({setPage}) {
             </div>
           );
         })}
+        {/* <div className=" col-span-3">
+          <input
+            type="text"
+            className="w-full bg-black text-white shadow-[0_0_10px_rgba(59,130,246,0.5)] rounded-md px-2 py-3"
+            placeholder=" ADD YOUR CUSTUM HABIT + TIME WITH  + TICK-MARK"
+          />
+        </div> */}
         <div className="col-span-3 space-y-3">
           {customHabits.map((habit, index) => (
             <div key={index} className="flex gap-2">
@@ -118,7 +125,17 @@ function AddHabits({setPage}) {
             cancel
           </button>
           <button
-            onClick={() => setPage("hero")}
+            onClick={() => {
+            const data = {
+    selected,         // predefined ids
+    custom: customHabits.filter(h => h.title !== "") // empty remove
+  };
+
+  localStorage.setItem("habits", JSON.stringify(data));
+
+  setSelectedHabits(data); // 👈 object bhej
+  setPage("hero");
+            }}
             className="text-xl shadow-[0_0_10px_rgba(100,100,200,0.5)] px-8 py-4 rounded-xl"
           >
             add habits

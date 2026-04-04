@@ -5,22 +5,31 @@ import Hero from "./pages/Hero";
 import AddHabits from "./pages/AddHabits";
 
 function App() {
+  const [page, setPage] = useState("register");
+
+  const [selectedHabits, setSelectedHabits] = useState(() => {
+    const saved = localStorage.getItem("habits");
+    return saved ? JSON.parse(saved) : { selected: [], custom: [] };
+  });
   useEffect(() => {
     const isLoggedIn = localStorage.getItem("isLoggedIn");
-
-    if (isLoggedIn) {
-      setPage("hero"); // direct hero section
+    const savedHabits = localStorage.getItem("habits");
+    if (isLoggedIn && savedHabits) {
+      setPage("hero"); // agar habits already hai
+    } else if (isLoggedIn) {
+      setPage("addHabits"); // agar habits nahi hai
     }
   }, []);
 
-  const [page, setPage] = useState("register");
   return (
     <div className="font-serif  min-h-screen">
       {/* <UserRegister show={showPopup} setShow={setShowPopup} /> */}
       {/* <Hero/> */}
       {page === "register" && <UserRegister setPage={setPage} />}
-      {page === "addHabits" && <AddHabits setPage={setPage} />}
-      {page === "hero" && <Hero />}
+      {page === "addHabits" && (
+        <AddHabits setPage={setPage} setSelectedHabits={setSelectedHabits} />
+      )}
+      {page === "hero" && <Hero selectedHabits={selectedHabits} />}
       {/* <AddHabits /> */}
     </div>
   );

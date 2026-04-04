@@ -1,8 +1,28 @@
 import React from "react";
 import Routine from "./Routine";
 
-function Hero() {
- 
+function Hero({ selectedHabits = { selected: [], custom: [] }  }) {
+  const allHabits = [
+    { id: 1, title: "Exercise" },
+    { id: 2, title: "Meditation" },
+    { id: 3, title: "Reading" },
+    { id: 4, title: "Writing" },
+    { id: 5, title: "Yoga" },
+    { id: 6, title: "Cooking" },
+    { id: 7, title: "Walking" },
+    { id: 8, title: "Drawing" },
+    { id: 9, title: "Coding" },
+    { id: 10, title: "Cleaning" },
+    { id: 11, title: "Gardening" },
+    { id: 12, title: "Learning" },
+    { id: 13, title: "Swimming" },
+    { id: 14, title: "Music" },
+    { id: 15, title: "Stretching" },
+  ];
+
+const habits = allHabits.filter((h) =>
+  selectedHabits.selected.includes(h.id)
+);
   return (
     <div className="border-2 border-black bg-black text-white h-screen grid grid-cols-[1fr_2fr_1fr] gap-3 p-3 overflow-hidden">
       {/* LEFT */}
@@ -100,60 +120,63 @@ function Hero() {
           </div>
         </div>
         <div className="shadow-[0_0_10px_rgba(168,85,247,0.3)] rounded-2xl flex-1 overflow-y-auto min-h-0 pt-1 pb-1">
-         <Routine/>
+          <Routine selectedHabits={selectedHabits} />
+          {/* {habits.map((habit) => (
+            <div key={habit.id}>
+              <p>{habit.title}</p>
+            </div>
+          ))} */}
         </div>
       </div>
 
       {/* RIGHT */}
       <div className="flex flex-col h-[96vh] gap-3">
         <div className="shadow-[0_0_10px_rgba(168,85,247,0.3)] rounded-2xl p-3 flex-1">
-          <p className="text-2xl mb-3 text-purple-400">
-            Streak 
-          </p>
+          <p className="text-2xl mb-3 text-purple-400">Streak</p>
 
           <p>🔥 Current Streak: 2 days</p>
           <p>🏆 Best Streak: 6 days</p>
         </div>
         <div className="shadow-[0_0_10px_rgba(168,85,247,0.3)] rounded-2xl p-3 flex-1">
           {/* Analytics */}
-            <p className="text-2xl mb-3 text-purple-400">📅 Weekly Progress</p>
+          <p className="text-2xl mb-3 text-purple-400">📅 Weekly Progress</p>
 
-            <div className="space-y-2">
-              <div className="flex justify-between">
-                <span>Mon</span>
-                <span>✅</span>
-              </div>
-
-              <div className="flex justify-between">
-                <span>Tue</span>
-                <span>❌</span>
-              </div>
-
-              <div className="flex justify-between">
-                <span>Wed</span>
-                <span>✅</span>
-              </div>
-
-              <div className="flex justify-between">
-                <span>Thu</span>
-                <span>✅</span>
-              </div>
-
-              <div className="flex justify-between">
-                <span>Fri</span>
-                <span>❌</span>
-              </div>
-
-              <div className="flex justify-between">
-                <span>Sat</span>
-                <span>⏳</span>
-              </div>
-
-              <div className="flex justify-between">
-                <span>Sun</span>
-                <span>⏳</span>
-              </div>
+          <div className="space-y-2">
+            <div className="flex justify-between">
+              <span>Mon</span>
+              <span>✅</span>
             </div>
+
+            <div className="flex justify-between">
+              <span>Tue</span>
+              <span>❌</span>
+            </div>
+
+            <div className="flex justify-between">
+              <span>Wed</span>
+              <span>✅</span>
+            </div>
+
+            <div className="flex justify-between">
+              <span>Thu</span>
+              <span>✅</span>
+            </div>
+
+            <div className="flex justify-between">
+              <span>Fri</span>
+              <span>❌</span>
+            </div>
+
+            <div className="flex justify-between">
+              <span>Sat</span>
+              <span>⏳</span>
+            </div>
+
+            <div className="flex justify-between">
+              <span>Sun</span>
+              <span>⏳</span>
+            </div>
+          </div>
         </div>
         <div className="shadow-[0_0_10px_rgba(168,85,247,0.3)] rounded-2xl p-3 flex-1">
           <p className="text-2xl mb-3 text-purple-400">Frequency</p>
