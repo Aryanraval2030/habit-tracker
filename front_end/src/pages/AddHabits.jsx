@@ -1,25 +1,9 @@
-import React, { useState } from "react";
-import {
-  FaDumbbell,
-  FaBook,
-  FaPenFancy,
-  FaRunning,
-  FaLeaf,
-  FaUtensils,
-  FaWalking,
-  FaPaintBrush,
-  FaLaptopCode,
-  FaBroom,
-  FaSeedling,
-  FaGraduationCap,
-  FaSwimmer,
-  FaMusic,
-  FaChild,
+import { useState } from "react";
+import { FaDumbbell, FaBook, FaPenFancy, FaRunning, FaLeaf, FaUtensils, FaWalking, FaPaintBrush, FaLaptopCode, FaBroom, FaSeedling, FaGraduationCap, FaSwimmer, FaMusic, FaChild,
 } from "react-icons/fa";
 
 function AddHabits({ setPage, setSelectedHabits }) {
-  const [selected, setSelected] = useState([]); // store selected habit ids
-
+  const [selected, setSelected] = useState([]);
   const habits = [
     { id: 1, name: "Exercise", icon: <FaDumbbell size={30} color="#F43F5E" /> },
     { id: 2, name: "Meditation", icon: <FaChild size={30} color="#10B981" /> },
@@ -28,39 +12,22 @@ function AddHabits({ setPage, setSelectedHabits }) {
     { id: 5, name: "Yoga", icon: <FaLeaf size={30} color="#14B8A6" /> },
     { id: 6, name: "Cooking", icon: <FaUtensils size={30} color="#F97316" /> },
     { id: 7, name: "Walking", icon: <FaWalking size={30} color="#6366F1" /> },
-    {
-      id: 8,
-      name: "Drawing",
-      icon: <FaPaintBrush size={30} color="#EC4899" />,
-    },
+    { id: 8, name: "Drawing", icon: <FaPaintBrush size={30} color="#EC4899" />,},
     { id: 9, name: "Coding", icon: <FaLaptopCode size={30} color="#0EA5E9" /> },
     { id: 10, name: "Cleaning", icon: <FaBroom size={30} color="#F59E0B" /> },
-    {
-      id: 11,
-      name: "Gardening",
-      icon: <FaSeedling size={30} color="#22C55E" />,
-    },
-    {
-      id: 12,
-      name: "Learning",
-      icon: <FaGraduationCap size={30} color="#2563EB" />,
-    },
+    { id: 11, name: "Gardening", icon: <FaSeedling size={30} color="#22C55E" />,},
+    { id: 12, name: "Learning", icon: <FaGraduationCap size={30} color="#2563EB" />,},
     { id: 13, name: "Swimming", icon: <FaSwimmer size={30} color="#06B6D4" /> },
     { id: 14, name: "Music", icon: <FaMusic size={30} color="#A78BFA" /> },
-    {
-      id: 15,
-      name: "Stretching",
-      icon: <FaRunning size={30} color="#EF4444" />,
-    },
+    { id: 15, name: "Stretching", icon: <FaRunning size={30} color="#EF4444" />,},
   ];
 
-  // toggle habit selection
   const handleClick = (id) => {
     setSelected((prev) =>
       prev.includes(id) ? prev.filter((s) => s !== id) : [...prev, id],
     );
   };
-
+ 
   const [customHabits, setCustomHabits] = useState([{ title: "", time: "" }]);
   const addNewHabit = () => {
     setCustomHabits([...customHabits, { title: "", time: "" }]);
@@ -88,13 +55,7 @@ function AddHabits({ setPage, setSelectedHabits }) {
             </div>
           );
         })}
-        {/* <div className=" col-span-3">
-          <input
-            type="text"
-            className="w-full bg-black text-white shadow-[0_0_10px_rgba(59,130,246,0.5)] rounded-md px-2 py-3"
-            placeholder=" ADD YOUR CUSTUM HABIT + TIME WITH  + TICK-MARK"
-          />
-        </div> */}
+
         <div className="col-span-3 space-y-3">
           {customHabits.map((habit, index) => (
             <div key={index} className="flex gap-2">
@@ -126,15 +87,13 @@ function AddHabits({ setPage, setSelectedHabits }) {
           </button>
           <button
             onClick={() => {
-            const data = {
-    selected,         // predefined ids
-    custom: customHabits.filter(h => h.title !== "") // empty remove
-  };
-
-  localStorage.setItem("habits", JSON.stringify(data));
-
-  setSelectedHabits(data); // 👈 object bhej
-  setPage("hero");
+              const data = {
+                selected,
+                custom: customHabits.filter((h) => h.title !== ""),
+              };
+              localStorage.setItem("habits", JSON.stringify(data));
+              setSelectedHabits(data);
+              setPage("hero");
             }}
             className="text-xl shadow-[0_0_10px_rgba(100,100,200,0.5)] px-8 py-4 rounded-xl"
           >

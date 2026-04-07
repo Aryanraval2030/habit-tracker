@@ -121,11 +121,6 @@ const habits = allHabits.filter((h) =>
         </div>
         <div className="shadow-[0_0_10px_rgba(168,85,247,0.3)] rounded-2xl flex-1 overflow-y-auto min-h-0 pt-1 pb-1">
           <Routine selectedHabits={selectedHabits} />
-          {/* {habits.map((habit) => (
-            <div key={habit.id}>
-              <p>{habit.title}</p>
-            </div>
-          ))} */}
         </div>
       </div>
 
