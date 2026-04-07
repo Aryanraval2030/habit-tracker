@@ -1,5 +1,20 @@
 import { useState } from "react";
-import { FaDumbbell, FaBook, FaPenFancy, FaRunning, FaLeaf, FaUtensils, FaWalking, FaPaintBrush, FaLaptopCode, FaBroom, FaSeedling, FaGraduationCap, FaSwimmer, FaMusic, FaChild,
+import {
+  FaDumbbell,
+  FaBook,
+  FaPenFancy,
+  FaRunning,
+  FaLeaf,
+  FaUtensils,
+  FaWalking,
+  FaPaintBrush,
+  FaLaptopCode,
+  FaBroom,
+  FaSeedling,
+  FaGraduationCap,
+  FaSwimmer,
+  FaMusic,
+  FaChild,
 } from "react-icons/fa";
 
 function AddHabits({ setPage, setSelectedHabits }) {
@@ -12,14 +27,30 @@ function AddHabits({ setPage, setSelectedHabits }) {
     { id: 5, name: "Yoga", icon: <FaLeaf size={30} color="#14B8A6" /> },
     { id: 6, name: "Cooking", icon: <FaUtensils size={30} color="#F97316" /> },
     { id: 7, name: "Walking", icon: <FaWalking size={30} color="#6366F1" /> },
-    { id: 8, name: "Drawing", icon: <FaPaintBrush size={30} color="#EC4899" />,},
+    {
+      id: 8,
+      name: "Drawing",
+      icon: <FaPaintBrush size={30} color="#EC4899" />,
+    },
     { id: 9, name: "Coding", icon: <FaLaptopCode size={30} color="#0EA5E9" /> },
     { id: 10, name: "Cleaning", icon: <FaBroom size={30} color="#F59E0B" /> },
-    { id: 11, name: "Gardening", icon: <FaSeedling size={30} color="#22C55E" />,},
-    { id: 12, name: "Learning", icon: <FaGraduationCap size={30} color="#2563EB" />,},
+    {
+      id: 11,
+      name: "Gardening",
+      icon: <FaSeedling size={30} color="#22C55E" />,
+    },
+    {
+      id: 12,
+      name: "Learning",
+      icon: <FaGraduationCap size={30} color="#2563EB" />,
+    },
     { id: 13, name: "Swimming", icon: <FaSwimmer size={30} color="#06B6D4" /> },
     { id: 14, name: "Music", icon: <FaMusic size={30} color="#A78BFA" /> },
-    { id: 15, name: "Stretching", icon: <FaRunning size={30} color="#EF4444" />,},
+    {
+      id: 15,
+      name: "Stretching",
+      icon: <FaRunning size={30} color="#EF4444" />,
+    },
   ];
 
   const handleClick = (id) => {
@@ -27,7 +58,7 @@ function AddHabits({ setPage, setSelectedHabits }) {
       prev.includes(id) ? prev.filter((s) => s !== id) : [...prev, id],
     );
   };
- 
+
   const [customHabits, setCustomHabits] = useState([{ title: "", time: "" }]);
   const addNewHabit = () => {
     setCustomHabits([...customHabits, { title: "", time: "" }]);

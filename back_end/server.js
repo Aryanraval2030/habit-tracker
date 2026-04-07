@@ -7,24 +7,21 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// ✅ Schema with unique email
 const userSchema = new mongoose.Schema({
   name: String,
   email: {
     type: String,
-    unique: true, // 🔥 duplicate rokega
+    unique: true, 
   },
   password: String,
 });
 
 const User = mongoose.model("User", userSchema);
 
-// ✅ REGISTER API
 app.post("/register", async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
-    // 🔍 check existing user
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
@@ -45,7 +42,6 @@ app.post("/register", async (req, res) => {
   }
 });
 
-// ✅ MongoDB connect
 mongoose
   .connect(
     "mongodb+srv://aryan2030:aryan682007@cluster0.wcopjgy.mongodb.net/habitTracker",

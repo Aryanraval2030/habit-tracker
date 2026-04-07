@@ -16,7 +16,7 @@ function App() {
     const isLoggedIn = localStorage.getItem("isLoggedIn");
     const savedHabits = localStorage.getItem("habits");
     if (isLoggedIn && savedHabits) {
-      setPage("hero"); 
+      setPage("hero");
     } else if (isLoggedIn) {
       setPage("addHabits");
     }
