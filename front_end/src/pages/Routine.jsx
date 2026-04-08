@@ -1,6 +1,32 @@
 import React from "react";
 
-function Routine({ selectedHabits = { selected: [], custom: [] }, setSelectedHabits }) {
+function Routine({ selectedHabits = { selected: [], custom: [] }, setSelectedHabits, setPage, completedHabits, setCompletedHabits }) {
+  const toggleDefaultHabit = (id) => {
+    setCompletedHabits(prev => {
+      const defaultCompletions = prev.default || [];
+      const isCompleted = defaultCompletions.includes(id);
+      return {
+        ...prev,
+        default: isCompleted 
+          ? defaultCompletions.filter(habitId => habitId !== id)
+          : [...defaultCompletions, id]
+      };
+    });
+  };
+
+  const toggleCustomHabit = (index) => {
+    setCompletedHabits(prev => {
+      const customCompletions = prev.custom || [];
+      const isCompleted = customCompletions.includes(index);
+      return {
+        ...prev,
+        custom: isCompleted 
+          ? customCompletions.filter(idx => idx !== index)
+          : [...customCompletions, index]
+      };
+    });
+  };
+
   const handleDeleteDefault = (id) => {
     const updatedSelected = selectedHabits.selected.filter(
       (habitId) => habitId !== id
@@ -49,7 +75,15 @@ function Routine({ selectedHabits = { selected: [], custom: [] }, setSelectedHab
       </p>
 
       {[...selectedList, ...customList].length === 0 ? (
-        <p className="text-white pl-2">No habits selected</p>
+        <div className="flex flex-col items-center mt-10">
+          <p className="text-white mb-4 text-lg">No habits selected</p>
+          <button 
+            onClick={() => setPage("addHabits")} 
+            className="bg-purple-600 hover:bg-purple-500 text-white px-4 py-2 rounded-lg font-semibold transition-colors"
+          >
+            + Add Habits
+          </button>
+        </div>
       ) : (
         <>
           {/* DEFAULT HABITS */}
@@ -61,7 +95,9 @@ function Routine({ selectedHabits = { selected: [], custom: [] }, setSelectedHab
               <p>{habit.title}</p>
               <input
                 type="checkbox"
-                className="w-5 h-5 accent-green-500 cursor-pointer"
+                className="w-5 h-5 accent-green-500 cursor-pointer mt-[2px]"
+                onChange={() => toggleDefaultHabit(habit.id)}
+                checked={completedHabits?.default?.includes(habit.id) || false}
               />
               <button onClick={() => handleDeleteDefault(habit.id)} className="absolute right-3 text-[13px]">🚫</button>
             </div>
@@ -75,11 +111,22 @@ function Routine({ selectedHabits = { selected: [], custom: [] }, setSelectedHab
               </p>
               <input
                 type="checkbox"
-                className="w-5 h-5 accent-green-500 cursor-pointer"
+                className="w-5 h-5 accent-green-500 cursor-pointer mt-[2px]"
+                onChange={() => toggleCustomHabit(index)}
+                checked={completedHabits?.custom?.includes(index) || false}
               />
               <button onClick={() => handleDeleteCustom(index)} className="absolute right-3 text-[13px]">🚫</button>
             </div>
           ))}
+          
+          <div className="flex justify-center mt-6 mb-4">
+            <button 
+              onClick={() => setPage("addHabits")} 
+              className="text-purple-400 hover:text-purple-300 border border-purple-500 hover:bg-purple-900/30 px-4 py-1.5 rounded-lg transition-colors text-sm"
+            >
+              + Add More Habits
+            </button>
+          </div>
         </>
       )}
     </div>

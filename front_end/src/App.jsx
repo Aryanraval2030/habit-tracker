@@ -12,6 +12,31 @@ function App() {
     return saved ? JSON.parse(saved) : { selected: [], custom: [] };
   });
 
+  const [completedHabits, setCompletedHabits] = useState(() => {
+    const saved = localStorage.getItem("completedHabits");
+    const today = new Date().toDateString();
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (parsed.date === today) {
+        return parsed;
+      }
+    }
+    return { date: today, default: [], custom: [] };
+  });
+
+  const [habitHistory, setHabitHistory] = useState(() => {
+    const saved = localStorage.getItem("habitHistory");
+    return saved ? JSON.parse(saved) : {};
+  });
+
+  useEffect(() => {
+    localStorage.setItem("completedHabits", JSON.stringify(completedHabits));
+  }, [completedHabits]);
+
+  useEffect(() => {
+    localStorage.setItem("habitHistory", JSON.stringify(habitHistory));
+  }, [habitHistory]);
+
   useEffect(() => {
     const isLoggedIn = localStorage.getItem("isLoggedIn");
     const savedHabits = localStorage.getItem("habits");
@@ -32,6 +57,11 @@ function App() {
         <Hero
           selectedHabits={selectedHabits}
           setSelectedHabits={setSelectedHabits}
+          setPage={setPage}
+          completedHabits={completedHabits}
+          setCompletedHabits={setCompletedHabits}
+          habitHistory={habitHistory}
+          setHabitHistory={setHabitHistory}
         />
       )}
     </div>
