@@ -28,7 +28,12 @@ function App() {
       {page === "addHabits" && (
         <AddHabits setPage={setPage} setSelectedHabits={setSelectedHabits} />
       )}
-      {page === "hero" && <Hero selectedHabits={selectedHabits} />}
+      {page === "hero" && (
+        <Hero
+          selectedHabits={selectedHabits}
+          setSelectedHabits={setSelectedHabits}
+        />
+      )}
     </div>
   );
 }

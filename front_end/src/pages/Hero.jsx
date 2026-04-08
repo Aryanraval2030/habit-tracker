@@ -1,7 +1,7 @@
 import React from "react";
 import Routine from "./Routine";
 
-function Hero({ selectedHabits = { selected: [], custom: [] }  }) {
+function Hero({ selectedHabits = { selected: [], custom: [] }, setSelectedHabits }) {
   const allHabits = [
     { id: 1, title: "Exercise" },
     { id: 2, title: "Meditation" },
@@ -120,7 +120,7 @@ const habits = allHabits.filter((h) =>
           </div>
         </div>
         <div className="shadow-[0_0_10px_rgba(168,85,247,0.3)] rounded-2xl flex-1 overflow-y-auto min-h-0 pt-1 pb-1">
-          <Routine selectedHabits={selectedHabits} />
+          <Routine selectedHabits={selectedHabits} setSelectedHabits={setSelectedHabits} />
         </div>
       </div>
 

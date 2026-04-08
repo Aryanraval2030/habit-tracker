@@ -1,6 +1,23 @@
 import React from "react";
 
-function Routine({ selectedHabits = { selected: [], custom: [] } }) {
+function Routine({ selectedHabits = { selected: [], custom: [] }, setSelectedHabits }) {
+  const handleDeleteDefault = (id) => {
+    const updatedSelected = selectedHabits.selected.filter(
+      (habitId) => habitId !== id
+    );
+    const newHabits = { ...selectedHabits, selected: updatedSelected };
+    setSelectedHabits(newHabits);
+    localStorage.setItem("habits", JSON.stringify(newHabits));
+  };
+
+  const handleDeleteCustom = (indexToDelete) => {
+    const updatedCustom = selectedHabits.custom.filter(
+      (_, index) => index !== indexToDelete
+    );
+    const newHabits = { ...selectedHabits, custom: updatedCustom };
+    setSelectedHabits(newHabits);
+    localStorage.setItem("habits", JSON.stringify(newHabits));
+  };
   const allHabits = [
     { id: 1, title: "Exercise" },
     { id: 2, title: "Meditation" },
@@ -46,16 +63,21 @@ function Routine({ selectedHabits = { selected: [], custom: [] } }) {
                 type="checkbox"
                 className="w-5 h-5 accent-green-500 cursor-pointer"
               />
-              <button className="absolute right-3 text-[13px]">🚫</button>
+              <button onClick={() => handleDeleteDefault(habit.id)} className="absolute right-3 text-[13px]">🚫</button>
             </div>
           ))}
 
           {/* CUSTOM HABITS */}
           {customList.map((habit, index) => (
-            <div key={index} className="pl-2 text-[20px]">
+            <div key={index} className="relative flex gap-[10px] pl-2 pt-1 text-[20px]">
               <p>
                 {habit.title} {habit.time && `(${habit.time})`}
               </p>
+              <input
+                type="checkbox"
+                className="w-5 h-5 accent-green-500 cursor-pointer"
+              />
+              <button onClick={() => handleDeleteCustom(index)} className="absolute right-3 text-[13px]">🚫</button>
             </div>
           ))}
         </>
