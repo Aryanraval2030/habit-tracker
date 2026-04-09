@@ -60,9 +60,11 @@ function AddHabits({ setPage, setSelectedHabits }) {
   };
 
   const [customHabits, setCustomHabits] = useState([{ title: "", time: "" }]);
+  
   const addNewHabit = () => {
     setCustomHabits([...customHabits, { title: "", time: "" }]);
   };
+
   const handleChange = (index, field, value) => {
     const updated = [...customHabits];
     updated[index][field] = value;

@@ -174,7 +174,7 @@ const habits = allHabits.filter((h) =>
               }
 
               return (
-                <div key={i} className="flex justify-between items-center bg-white/5 px-2 py-1.5 rounded-md">
+                <div key={i} className="flex justify-between items-center bg-[#111] px-2 py-1.5 rounded-md">
                   <span>{formattedDate}</span>
                   <span className="text-gray-300">
                     {historyData.completed} / {historyData.total} <span className="ml-1 w-5 inline-block text-center">{emoji}</span>
