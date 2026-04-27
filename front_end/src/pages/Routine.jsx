@@ -33,7 +33,6 @@ function Routine({ selectedHabits = { selected: [], custom: [] }, setSelectedHab
     );
     const newHabits = { ...selectedHabits, selected: updatedSelected };
     setSelectedHabits(newHabits);
-    localStorage.setItem("habits", JSON.stringify(newHabits));
   };
 
   const handleDeleteCustom = (indexToDelete) => {
@@ -42,7 +41,6 @@ function Routine({ selectedHabits = { selected: [], custom: [] }, setSelectedHab
     );
     const newHabits = { ...selectedHabits, custom: updatedCustom };
     setSelectedHabits(newHabits);
-    localStorage.setItem("habits", JSON.stringify(newHabits));
   };
   const allHabits = [
     { id: 1, title: "Exercise" },

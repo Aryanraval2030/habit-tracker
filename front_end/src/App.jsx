@@ -1,57 +1,114 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./App.css";
 import UserRegister from "./UserRegister";
 import Hero from "./pages/Hero";
 import AddHabits from "./pages/AddHabits";
 
+export const API_URL = "http://localhost:3001";
+
 function App() {
-  const [page, setPage] = useState("register");
+  const [page, setPage] = useState("loading");
 
-  const [selectedHabits, setSelectedHabits] = useState(() => {
-    const saved = localStorage.getItem("habits");
-    return saved ? JSON.parse(saved) : { selected: [], custom: [] };
+  const [selectedHabits, setSelectedHabits] = useState({
+    selected: [],
+    custom: [],
   });
+  const [completedHabits, setCompletedHabits] = useState({
+    date: new Date().toDateString(),
+    default: [],
+    custom: [],
+  });
+  const [habitHistory, setHabitHistory] = useState({});
 
-  const [completedHabits, setCompletedHabits] = useState(() => {
-    const saved = localStorage.getItem("completedHabits");
-    const today = new Date().toDateString();
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      if (parsed.date === today) {
-        return parsed;
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await fetch(`${API_URL}/me`, { credentials: "include" });
+        if (res.ok) {
+          const user = await res.json();
+          setSelectedHabits(
+            user.selectedHabits || { selected: [], custom: [] },
+          );
+          setCompletedHabits(
+            user.completedHabits || {
+              date: new Date().toDateString(),
+              default: [],
+              custom: [],
+            },
+          );
+          setHabitHistory(user.habitHistory || {});
+
+          if (
+            user.selectedHabits &&
+            (user.selectedHabits.selected?.length > 0 ||
+              user.selectedHabits.custom?.length > 0)
+          ) {
+            setPage("hero");
+          } else {
+            setPage("addHabits");
+          }
+        } else {
+          setPage("register");
+        }
+      } catch (err) {
+        console.error("Failed to check auth status", err);
+        setPage("register");
       }
-    }
-    return { date: today, default: [], custom: [] };
-  });
-
-  const [habitHistory, setHabitHistory] = useState(() => {
-    const saved = localStorage.getItem("habitHistory");
-    return saved ? JSON.parse(saved) : {};
-  });
-
-  useEffect(() => {
-    localStorage.setItem("completedHabits", JSON.stringify(completedHabits));
-  }, [completedHabits]);
-
-  useEffect(() => {
-    localStorage.setItem("habitHistory", JSON.stringify(habitHistory));
-  }, [habitHistory]);
-
-  useEffect(() => {
-    const isLoggedIn = localStorage.getItem("isLoggedIn");
-    const savedHabits = localStorage.getItem("habits");
-    if (isLoggedIn && savedHabits) {
-      setPage("hero");
-    } else if (isLoggedIn) {
-      setPage("addHabits");
-    }
+    };
+    fetchUser();
   }, []);
 
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    if (page !== "loading" && page !== "register") {
+      const saveToBackend = async () => {
+        try {
+          await fetch(`${API_URL}/update-habits`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+            body: JSON.stringify({
+              selectedHabits,
+              completedHabits,
+              habitHistory,
+            }),
+          });
+        } catch (err) {
+          console.error("Failed to save habit status", err);
+        }
+      };
+
+      const timeoutId = setTimeout(() => saveToBackend(), 500);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [selectedHabits, completedHabits, habitHistory, page]);
+
   return (
-    <div className="font-serif  min-h-screen">
-      {page === "register" && <UserRegister setPage={setPage} />}
+    <div className="font-serif min-h-screen">
+      {page === "loading" && (
+        <div className="flex justify-center items-center h-screen bg-black text-white text-2xl">
+          Loading Data...
+        </div>
+      )}
+      {page === "register" && (
+        <UserRegister
+          setPage={setPage}
+          setSelectedHabits={setSelectedHabits}
+          setCompletedHabits={setCompletedHabits}
+          setHabitHistory={setHabitHistory}
+        />
+      )}
       {page === "addHabits" && (
-        <AddHabits setPage={setPage} setSelectedHabits={setSelectedHabits} />
+        <AddHabits
+          setPage={setPage}
+          setSelectedHabits={setSelectedHabits}
+          selectedHabits={selectedHabits}
+        />
       )}
       {page === "hero" && (
         <Hero

@@ -1,11 +1,14 @@
 import { useState } from "react";
+import { API_URL } from "./App";
 
-function UserRegister({ setPage }) {
+function UserRegister({ setPage, setSelectedHabits, setCompletedHabits, setHabitHistory }) {
+  const [isLogin, setIsLogin] = useState(false);
   const [userForm, setUserForm] = useState({
     name: "",
     email: "",
     password: "",
   });
+
   const inputData = (e) => {
     const { name, value } = e.target;
     setUserForm((pre) => ({
@@ -17,7 +20,7 @@ function UserRegister({ setPage }) {
   const handleChange = async (e) => {
     e.preventDefault();
     if (
-      userForm.name === "" ||
+      (!isLogin && userForm.name === "") ||
       userForm.email === "" ||
       userForm.password === ""
     ) {
@@ -25,23 +28,39 @@ function UserRegister({ setPage }) {
     }
 
     try {
-      const res = await fetch("http://localhost:3001/register", {
+      const endpoint = isLogin ? "/login" : "/register";
+      const res = await fetch(`${API_URL}${endpoint}`, {
         method: "POST",
         headers: {
           "content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify(userForm),
       });
-      const data = await res.text();
-      if (res.status === 400) {
-        alert("user already exists");
-        setPage("addHabits");
-      } else {
-        console.log("register successfully");
-        localStorage.setItem("isLoggedIn", "true");
-        setPage("addHabits");
+      
+      if (!res.ok) {
+        const errorText = await res.text();
+        return alert(errorText || "Authentication failed");
       }
-      console.log(data);
+
+      console.log(isLogin ? "login successfully" : "register successfully");
+
+      const meRes = await fetch(`${API_URL}/me`, { credentials: "include" });
+      if (meRes.ok) {
+        const userData = await meRes.json();
+        if(setSelectedHabits) setSelectedHabits(userData.selectedHabits || { selected: [], custom: [] });
+        if(setCompletedHabits) setCompletedHabits(userData.completedHabits || { date: new Date().toDateString(), default: [], custom: [] });
+        if(setHabitHistory) setHabitHistory(userData.habitHistory || {});
+        
+        if (userData.selectedHabits && (userData.selectedHabits.selected?.length > 0 || userData.selectedHabits.custom?.length > 0)) {
+          setPage("hero");
+        } else {
+          setPage("addHabits");
+        }
+      } else {
+        setPage("addHabits"); 
+      }
+
     } catch (error) {
       console.log("error:", error);
     }
@@ -49,27 +68,31 @@ function UserRegister({ setPage }) {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-      <div className="shadow-[0_0_8px_rgba(255,255,255,0.6)] bg-[rgba(255,255,255,0.6)]  w-full max-w-md p-6 rounded-2xl">
+      <div className="shadow-[0_0_8px_rgba(255,255,255,0.6)] bg-[rgba(255,255,255,0.6)] w-full max-w-md p-6 rounded-2xl">
         <h2 className="text-2xl text-black font-bold text-center mb-2">
           Welcome to habit-tracker
         </h2>
 
-        <p className="text-center text-gray-500 mb-5">Create your account</p>
+        <p className="text-center text-gray-800 mb-5 font-medium">
+           {isLogin ? "Login to your account" : "Create your account"}
+        </p>
 
         <form
           autoComplete="off"
           onSubmit={handleChange}
           className="flex flex-col gap-4"
         >
-          <input
-            type="text"
-            placeholder="Name"
-            onChange={inputData}
-            name="name"
-            autoComplete="off"
-            value={userForm.name}
-            className="shadow-[0_0_10px_rgba(168,85,247,0.3)] border-none text-white w-full border p-3 rounded-lg mb-3 bg-black"
-          />
+          {!isLogin && (
+            <input
+              type="text"
+              placeholder="Name"
+              onChange={inputData}
+              name="name"
+              autoComplete="off"
+              value={userForm.name}
+              className="shadow-[0_0_10px_rgba(168,85,247,0.3)] border-none text-white w-full border p-3 rounded-lg mb-3 bg-black"
+            />
+          )}
 
           <input
             type="email"
@@ -92,12 +115,22 @@ function UserRegister({ setPage }) {
           />
 
           <button
-            className="w-full bg-blue-950 text-white font-bold  py-3 rounded-lg"
+            className="w-full bg-blue-950 text-white font-bold py-3 rounded-lg hover:bg-blue-900 transition-colors"
             type="submit"
           >
-            Register
+            {isLogin ? "Login" : "Register"}
           </button>
         </form>
+        
+        <p className="text-center text-black mt-4 font-medium">
+          {isLogin ? "Don't have an account? " : "Already have an account? "}
+          <button 
+             onClick={() => setIsLogin(!isLogin)} 
+             className="text-blue-900 font-bold hover:underline"
+          >
+            {isLogin ? "Register" : "Login"}
+          </button>
+        </p>
       </div>
     </div>
   );
