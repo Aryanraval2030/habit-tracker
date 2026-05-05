@@ -43,9 +43,19 @@ function UserRegister({ setPage, setSelectedHabits, setCompletedHabits, setHabit
         return alert(errorText || "Authentication failed");
       }
 
+      const responseData = await res.json();
+      if (responseData.token) {
+        localStorage.setItem("token", responseData.token);
+      }
+
       console.log(isLogin ? "login successfully" : "register successfully");
 
-      const meRes = await fetch(`${API_URL}/me`, { credentials: "include" });
+      const meRes = await fetch(`${API_URL}/me`, { 
+        credentials: "include",
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
+      });
       if (meRes.ok) {
         const userData = await meRes.json();
         if(setSelectedHabits) setSelectedHabits(userData.selectedHabits || { selected: [], custom: [] });

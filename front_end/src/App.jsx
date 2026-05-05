@@ -25,7 +25,12 @@ function App() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await fetch(`${API_URL}/me`, { credentials: "include" });
+        const res = await fetch(`${API_URL}/me`, { 
+          credentials: "include",
+          headers: {
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+          }
+        });
         if (res.ok) {
           const user = await res.json();
           setSelectedHabits(
@@ -70,7 +75,10 @@ function App() {
         try {
           await fetch(`${API_URL}/update-habits`, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { 
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${localStorage.getItem("token")}`
+            },
             credentials: "include",
             body: JSON.stringify({
               selectedHabits,
