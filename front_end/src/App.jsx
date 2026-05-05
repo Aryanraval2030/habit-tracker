@@ -4,7 +4,7 @@ import UserRegister from "./UserRegister";
 import Hero from "./pages/Hero";
 import AddHabits from "./pages/AddHabits";
 
-export const API_URL = "http://localhost:3001";
+export const API_URL = "http://localhost:3001/api";
 
 function App() {
   const [page, setPage] = useState("loading");
