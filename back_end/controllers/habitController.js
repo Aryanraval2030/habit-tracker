@@ -39,8 +39,8 @@ export const registerUser = async (req, res) => {
     });
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false, // set to true if using https
-      sameSite: "lax",
+      secure: true, // required for cross-origin cookies on HTTPS
+      sameSite: "none", // required for cross-origin cookies
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
 
@@ -80,8 +80,8 @@ export const loginUser = async (req, res) => {
     });
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false,
-      sameSite: "lax",
+      secure: true, // required for cross-origin cookies on HTTPS
+      sameSite: "none", // required for cross-origin cookies
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -130,7 +130,11 @@ export const userAddHabits = async (req, res) => {
 
 // 4. LOGOUT
 export const userLogout = (req, res) => {
-  res.clearCookie("token");
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+  });
   res.status(200).send("Logged out");
 };
 
