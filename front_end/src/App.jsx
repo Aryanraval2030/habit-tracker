@@ -126,7 +126,9 @@ function App() {
           setHabitHistory={setHabitHistory}
         />
       )}
+      <p>develop by Aryan Raval</p>
     </div>
+
   );
 }
 
