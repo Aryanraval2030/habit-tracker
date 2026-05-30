@@ -126,7 +126,7 @@ function App() {
           setHabitHistory={setHabitHistory}
         />
       )}
-      <p className="text-center text-gray-400 bg-black py-3 mt-[5vh] text-sm">
+      <p className="text-center text-gray-400 bg-black py-3 pt-[5vh] text-sm">
         Developed by Aryan Raval
       </p>{" "}
     </div>
