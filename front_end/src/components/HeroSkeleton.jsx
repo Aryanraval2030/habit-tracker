@@ -35,7 +35,7 @@ const HeroSkeleton = () => {
               {Array.from({ length: 32 }).map((_, i) => (
                 <div
                   key={i}
-                  className="h-10 w-10 md:h-12 md:w-12 rounded bg-[#1a1a1a]"
+                  className="h-10 w-10 md:h-12 md:w-12 rounded bg-[#6c308f]"
                 ></div>
               ))}
             </div>
