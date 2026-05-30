@@ -27,6 +27,9 @@ function UserRegister({
     if (!isLogin && userForm.name === "") {
       return alert("Enter name");
     }
+    if (userForm.email === "") {
+      return alert("Enter email");
+    }
 
     if (userForm.password === "") {
       return alert("Enter password");
@@ -43,7 +46,6 @@ function UserRegister({
         headers: {
           "content-Type": "application/json",
         },
-        credentials: "include",
         body: JSON.stringify(userForm),
       });
 
@@ -60,7 +62,6 @@ function UserRegister({
       console.log(isLogin ? "login successfully" : "register successfully");
 
       const meRes = await fetch(`${API_URL}/me`, {
-        credentials: "include",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -99,17 +100,17 @@ function UserRegister({
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black px-4 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-[#020617] px-4 relative overflow-hidden font-serif">
       {/* background glow */}
       <div className="absolute top-[-120px] left-[-120px] w-[300px] h-[300px] bg-blue-600/20 blur-3xl rounded-full"></div>
 
-      <div className="absolute bottom-[-120px] right-[-120px] w-[300px] h-[300px] bg-purple-600/20 blur-3xl rounded-full"></div>
+      <div className="absolute bottom-[-120px] right-[-120px] w-[300px] h-[300px] bg-cyan-500/20 blur-3xl rounded-full"></div>
 
       {/* card */}
-      <div className="relative z-10 w-full max-w-md rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-[0_0_40px_rgba(59,130,246,0.15)] p-8">
+      <div className="relative z-10 w-full max-w-md rounded-3xl border border-[#1e3a5f] bg-[#07111f]/90 backdrop-blur-xl shadow-[0_0_40px_rgba(37,99,235,0.15)] p-8 transition-all duration-300 hover:border-blue-500/40">
         {/* top badge */}
         <div className="flex justify-center mb-5">
-          <div className="px-4 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium">
+          <div className="px-4 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium tracking-wide">
             Habit Tracker
           </div>
         </div>
@@ -127,6 +128,7 @@ function UserRegister({
 
         {/* form */}
         <form autoComplete="off" onSubmit={handleChange} className="space-y-5">
+          {/* full name */}
           {!isLogin && (
             <div>
               <label className="text-sm text-gray-300 mb-2 block">
@@ -139,11 +141,26 @@ function UserRegister({
                 onChange={inputData}
                 name="name"
                 value={userForm.name}
-                className="w-full bg-[#111827] border border-[#1f2937] focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all duration-300 text-white rounded-xl px-4 py-3"
+                className="w-full bg-[#0f172a] border border-[#1e293b] focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all duration-300 text-white rounded-xl px-4 py-3"
               />
             </div>
           )}
 
+          {/* email */}
+          <div>
+            <label className="text-sm text-gray-300 mb-2 block">Email</label>
+
+            <input
+              type="email"
+              placeholder="Enter your email"
+              onChange={inputData}
+              name="email"
+              value={userForm.email}
+              className="w-full bg-[#0f172a] border border-[#1e293b] focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all duration-300 text-white rounded-xl px-4 py-3"
+            />
+          </div>
+
+          {/* password */}
           <div>
             <label className="text-sm text-gray-300 mb-2 block">Password</label>
 
@@ -153,7 +170,7 @@ function UserRegister({
               onChange={inputData}
               name="password"
               value={userForm.password}
-              className="w-full bg-[#111827] border border-[#1f2937] focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all duration-300 text-white rounded-xl px-4 py-3"
+              className="w-full bg-[#0f172a] border border-[#1e293b] focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all duration-300 text-white rounded-xl px-4 py-3"
             />
 
             <p className="text-xs text-gray-500 mt-2">Minimum 8 characters</p>
@@ -161,7 +178,7 @@ function UserRegister({
 
           {/* button */}
           <button
-            className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:scale-[1.02] hover:shadow-[0_0_25px_rgba(59,130,246,0.4)] transition-all duration-300 text-white font-semibold py-3 rounded-xl"
+            className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:scale-[1.02] hover:shadow-[0_0_25px_rgba(59,130,246,0.4)] transition-all duration-300 text-white font-semibold py-3 rounded-xl"
             type="submit"
           >
             {isLogin ? "Login" : "Create Account"}
