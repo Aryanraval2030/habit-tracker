@@ -126,8 +126,9 @@ function App() {
           setHabitHistory={setHabitHistory}
         />
       )}
-      <p>develop by Aryan Raval</p>
-    </div>
+<p className="text-center text-gray-400 bg-black py-3 text-sm">
+  Developed by Aryan Raval
+</p>    </div>
 
   );
 }
