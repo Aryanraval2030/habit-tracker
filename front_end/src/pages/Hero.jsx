@@ -160,221 +160,352 @@ function Hero({
 
   const activityDays = getActivityHeatmap();
 
-  return (
-    <div className="bg-black text-white min-h-screen flex flex-col lg:grid lg:grid-cols-[1fr_2fr_1fr] gap-4 p-4 lg:h-screen lg:overflow-hidden px-[5px] font-serif">
-      {/* LEFT */}
-      <div className="flex flex-col gap-4 lg:h-full overflow-hidden">
-        <div className="shadow-[0_0_15px_rgba(168,85,247,0.2)] bg-black/40 border border-purple-500/20 backdrop-blur-md rounded-2xl p-5 flex-1 transition-transform hover:scale-[1.01]">
-          {/* Analytics */}
-          <h2 className="text-2xl mb-4 text-purple-400 font-bold">
-            📊 Today Analytics
-          </h2>
-          <div className="space-y-3 text-lg">
-            <div className="flex justify-between items-center bg-white/5 p-3 rounded-xl">
-              <span>Total Habits</span>
-              <span className="font-bold text-xl">{totalHabitsCount}</span>
-            </div>
-            <div className="flex justify-between items-center bg-white/5 p-3 rounded-xl">
-              <span>Completed Today</span>
-              <span className="font-bold text-xl text-green-400">
-                {completedCount}
-              </span>
-            </div>
-            <div className="flex justify-between items-center bg-white/5 p-3 rounded-xl">
-              <span>Success Rate</span>
-              <span className="font-bold text-xl text-blue-400">
-                {successRate}%
-              </span>
-            </div>
+return (
+  <div className="bg-[#020617] text-white min-h-screen relative overflow-hidden flex flex-col lg:grid lg:grid-cols-[1fr_2fr_1fr] gap-4 p-4 lg:h-screen lg:overflow-hidden font-serif">
+
+    {/* background glow */}
+    <div className="absolute top-[-150px] left-[-150px] w-[350px] h-[350px] bg-blue-600/10 blur-3xl rounded-full"></div>
+
+    <div className="absolute bottom-[-150px] right-[-150px] w-[350px] h-[350px] bg-cyan-500/10 blur-3xl rounded-full"></div>
+
+    {/* LEFT */}
+    <div className="flex flex-col gap-4 lg:h-full overflow-hidden relative z-10">
+
+      {/* Analytics */}
+      <div
+        className="
+        bg-[#07111f]/90
+        border border-[#1e3a5f]
+        backdrop-blur-xl
+        rounded-2xl
+        shadow-[0_0_20px_rgba(37,99,235,0.08)]
+        transition-all duration-300
+        hover:border-blue-500/40
+        hover:shadow-[0_0_30px_rgba(59,130,246,0.18)]
+        p-5 flex-1
+      "
+      >
+        <h2 className="text-2xl mb-4 text-blue-400 font-bold">
+          📊 Today Analytics
+        </h2>
+
+        <div className="space-y-3 text-lg">
+
+          <div className="flex justify-between items-center bg-[#0f172a] p-3 rounded-xl border border-[#1e293b]">
+            <span>Total Habits</span>
+            <span className="font-bold text-xl">
+              {totalHabitsCount}
+            </span>
           </div>
-          <p className="mt-5 text-purple-400 font-medium italic text-center animate-pulse">
-            🔥 Keep going! You’re doing great
-          </p>
+
+          <div className="flex justify-between items-center bg-[#0f172a] p-3 rounded-xl border border-[#1e293b]">
+            <span>Completed Today</span>
+            <span className="font-bold text-xl text-green-400">
+              {completedCount}
+            </span>
+          </div>
+
+          <div className="flex justify-between items-center bg-[#0f172a] p-3 rounded-xl border border-[#1e293b]">
+            <span>Success Rate</span>
+            <span className="font-bold text-xl text-blue-400">
+              {successRate}%
+            </span>
+          </div>
+
         </div>
 
-        <div className="shadow-[0_0_15px_rgba(168,85,247,0.2)] bg-black/40 border border-purple-500/20 backdrop-blur-md rounded-2xl p-5 flex-1 lg:max-h-[50%] flex flex-col transition-transform hover:scale-[1.01]">
-          {/* History */}
-          <p className="text-2xl mb-4 text-purple-400 font-bold">
-            📅 Weekly History
-          </p>
-          <div className="flex flex-col gap-2 overflow-y-auto pr-2 custom-scrollbar flex-1">
-            {weekDates.map((date, i) => {
-              const dateStr = date.toDateString();
-              const formattedDate = date.toLocaleDateString("en-GB", {
-                day: "2-digit",
-                month: "short",
-              });
-              const historyData = habitHistory[dateStr] || {
-                total: 0,
-                completed: 0,
-              };
-
-              let emoji = "➖";
-              if (historyData.total > 0) {
-                const perc = historyData.completed / historyData.total;
-                if (perc === 1) emoji = "✨";
-                else if (perc >= 0.5) emoji = "👍";
-                else emoji = "😐";
-              }
-
-              return (
-                <div
-                  key={i}
-                  className="flex justify-between items-center bg-white/5 hover:bg-white/10 transition-colors px-3 py-2 rounded-lg"
-                >
-                  <span className="font-medium">{formattedDate}</span>
-                  <span className="text-gray-300 font-medium bg-black/50 px-3 py-1 rounded-full text-sm">
-                    {historyData.completed} / {historyData.total}{" "}
-                    <span className="ml-2 w-5 inline-block text-center">
-                      {emoji}
-                    </span>
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+        <p className="mt-5 text-blue-400 font-medium italic text-center animate-pulse">
+          🔥 Keep going! You’re doing great
+        </p>
       </div>
 
-      {/* CENTER */}
-      <div className="flex flex-col gap-4 lg:h-full overflow-hidden order-first lg:order-none">
-        <div className="shadow-[0_0_15px_rgba(59,130,246,0.2)] bg-black/40 border border-blue-500/20 backdrop-blur-md rounded-2xl p-5 flex-none transition-transform hover:scale-[1.01]">
-          <div className="flex justify-end gap-3 mb-2 items-center text-xs text-gray-400">
-            <p>less</p>
-            <div className="w-4 h-4 rounded-sm bg-white/10"></div>
-            <div className="w-4 h-4 rounded-sm bg-blue-950"></div>
-            <div className="w-4 h-4 rounded-sm bg-blue-800"></div>
-            <div className="w-4 h-4 rounded-sm bg-blue-500"></div>
-            <p>more</p>
-          </div>
+      {/* Weekly History */}
+      <div
+        className="
+        bg-[#07111f]/90
+        border border-[#1e3a5f]
+        backdrop-blur-xl
+        rounded-2xl
+        shadow-[0_0_20px_rgba(37,99,235,0.08)]
+        transition-all duration-300
+        hover:border-blue-500/40
+        hover:shadow-[0_0_30px_rgba(59,130,246,0.18)]
+        p-5 flex-1 lg:max-h-[50%] flex flex-col
+      "
+      >
+        <p className="text-2xl mb-4 text-blue-400 font-bold">
+          📅 Weekly History
+        </p>
 
-          <div className="flex flex-col items-center mb-6">
-            <div className="w-16 h-16 bg-blue-500/20 rounded-full flex items-center justify-center mb-2 shadow-[0_0_15px_rgba(59,130,246,0.5)]">
-              <span className="text-3xl">🔥</span>
-            </div>
-            <h1 className="text-2xl font-bold tracking-wider text-blue-100">
-              ACTIVITY
-            </h1>
-          </div>
+        <div className="flex flex-col gap-2 overflow-y-auto pr-2 custom-scrollbar flex-1">
+          {weekDates.map((date, i) => {
+            const dateStr = date.toDateString();
 
-          <div className="flex gap-2.5 justify-center flex-wrap max-w-lg mx-auto">
-            {activityDays.map((day) => (
+            const formattedDate = date.toLocaleDateString("en-GB", {
+              day: "2-digit",
+              month: "short",
+            });
+
+            const historyData = habitHistory[dateStr] || {
+              total: 0,
+              completed: 0,
+            };
+
+            let emoji = "➖";
+
+            if (historyData.total > 0) {
+              const perc = historyData.completed / historyData.total;
+
+              if (perc === 1) emoji = "✨";
+              else if (perc >= 0.5) emoji = "👍";
+              else emoji = "😐";
+            }
+
+            return (
               <div
-                key={day.id}
-                title={day.dateStr}
-                className={`${day.colorClass} rounded-md h-[40px] w-[40px] sm:h-[45px] sm:w-[45px] transition-all cursor-pointer hover:scale-110 hover:-translate-y-1`}
-              ></div>
-            ))}
-          </div>
-        </div>
-
-        <div className="shadow-[0_0_15px_rgba(34,197,94,0.2)] bg-black/40 border border-green-500/20 backdrop-blur-md rounded-2xl flex-1 overflow-y-auto p-5 transition-transform hover:scale-[1.01]">
-          <Routine
-            selectedHabits={selectedHabits}
-            setSelectedHabits={setSelectedHabits}
-            setPage={setPage}
-            completedHabits={completedHabits}
-            setCompletedHabits={setCompletedHabits}
-          />
-        </div>
-      </div>
-
-      {/* RIGHT */}
-      <div className="flex flex-col gap-4 lg:h-full overflow-hidden">
-        <div className="shadow-[0_0_15px_rgba(234,179,8,0.2)] bg-black/40 border border-yellow-500/20 backdrop-blur-md rounded-2xl p-5 flex-1 transition-transform hover:scale-[1.01]">
-          <p className="text-2xl mb-5 text-yellow-400 font-bold">🏆 Streak</p>
-
-          <div className="space-y-4">
-            <div className="bg-gradient-to-r from-orange-500/20 to-transparent p-4 rounded-xl border-l-4 border-orange-500">
-              <p className="text-gray-300 text-sm uppercase tracking-wider mb-1">
-                Current Streak
-              </p>
-              <p className="text-3xl font-bold flex items-center gap-2">
-                🔥 {currentStreak}{" "}
-                <span className="text-lg font-normal text-gray-400">
-                  {currentStreak === 1 ? "day" : "days"}
+                key={i}
+                className="flex justify-between items-center bg-[#0f172a] hover:bg-[#172554] transition-all px-3 py-2 rounded-lg border border-[#1e293b]"
+              >
+                <span className="font-medium">
+                  {formattedDate}
                 </span>
-              </p>
-            </div>
 
-            <div className="bg-gradient-to-r from-yellow-500/20 to-transparent p-4 rounded-xl border-l-4 border-yellow-500">
-              <p className="text-gray-300 text-sm uppercase tracking-wider mb-1">
-                Best Streak
-              </p>
-              <p className="text-3xl font-bold flex items-center gap-2">
-                ⭐ {bestStreak}{" "}
-                <span className="text-lg font-normal text-gray-400">
-                  {bestStreak === 1 ? "day" : "days"}
-                </span>
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="shadow-[0_0_15px_rgba(168,85,247,0.2)] bg-black/40 border border-purple-500/20 backdrop-blur-md rounded-2xl p-5 flex-1 lg:max-h-[50%] flex flex-col transition-transform hover:scale-[1.01]">
-          <p className="text-2xl mb-4 text-purple-400 font-bold">
-            🎯 Weekly Progress
-          </p>
-
-          <div className="space-y-2 flex-1 overflow-y-auto pr-2 custom-scrollbar">
-            {weekDates.map((date, i) => {
-              const dateStr = date.toDateString();
-              const dayName = date.toLocaleDateString("en-US", {
-                weekday: "long",
-              });
-
-              const today = new Date();
-              today.setHours(0, 0, 0, 0);
-
-              const isFuture = date.getTime() > today.getTime();
-              const isToday = date.getTime() === today.getTime();
-
-              let icon = (
-                <span className="text-gray-500 animate-pulse">⏳</span>
-              );
-              let bgClass = "bg-white/5";
-
-              if (!isFuture) {
-                const historyDay = habitHistory[dateStr];
-                const isCompleted = historyDay && historyDay.completed > 0;
-
-                if (isCompleted) {
-                  icon = <span>✅</span>;
-                  bgClass = "bg-green-500/10 border border-green-500/30";
-                } else if (isToday) {
-                  icon = (
-                    <span className="text-blue-400 animate-bounce block">
-                      👇
-                    </span>
-                  );
-                  bgClass = "bg-blue-500/10 border border-blue-500/30";
-                } else {
-                  icon = <span>❌</span>;
-                  bgClass = "bg-red-500/10 border border-red-500/30";
-                }
-              }
-
-              return (
-                <div
-                  key={i}
-                  className={`flex justify-between items-center px-4 py-3 rounded-xl transition-all ${bgClass}`}
-                >
-                  <span
-                    className={`font-medium ${isToday ? "text-blue-400 font-bold" : ""}`}
-                  >
-                    {dayName}
+                <span className="text-gray-300 font-medium bg-black/30 px-3 py-1 rounded-full text-sm">
+                  {historyData.completed} / {historyData.total}
+                  <span className="ml-2 w-5 inline-block text-center">
+                    {emoji}
                   </span>
-                  <div className="text-xl bg-black/40 w-10 h-10 rounded-full flex items-center justify-center shadow-inner">
-                    {icon}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+                </span>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
-  );
+
+    {/* CENTER */}
+    <div className="flex flex-col gap-4 lg:h-full overflow-hidden order-first lg:order-none relative z-10">
+
+      {/* Activity */}
+      <div
+        className="
+        bg-[#07111f]/90
+        border border-[#1e3a5f]
+        backdrop-blur-xl
+        rounded-2xl
+        shadow-[0_0_20px_rgba(37,99,235,0.08)]
+        transition-all duration-300
+        hover:border-blue-500/40
+        hover:shadow-[0_0_30px_rgba(59,130,246,0.18)]
+        p-5
+      "
+      >
+        <div className="flex justify-end gap-3 mb-2 items-center text-xs text-gray-400">
+          <p>less</p>
+
+          <div className="w-4 h-4 rounded-sm bg-[#172554]"></div>
+          <div className="w-4 h-4 rounded-sm bg-blue-950"></div>
+          <div className="w-4 h-4 rounded-sm bg-blue-800"></div>
+          <div className="w-4 h-4 rounded-sm bg-blue-500"></div>
+
+          <p>more</p>
+        </div>
+
+        <div className="flex flex-col items-center mb-6">
+
+          <div className="w-16 h-16 bg-blue-500/20 rounded-full flex items-center justify-center mb-2 shadow-[0_0_20px_rgba(59,130,246,0.4)]">
+            <span className="text-3xl">🔥</span>
+          </div>
+
+          <h1 className="text-2xl font-bold tracking-wider text-blue-100">
+            ACTIVITY
+          </h1>
+        </div>
+
+        <div className="flex gap-2.5 justify-center flex-wrap max-w-lg mx-auto">
+          {activityDays.map((day) => (
+            <div
+              key={day.id}
+              title={day.dateStr}
+              className={`${day.colorClass} rounded-md h-[40px] w-[40px] sm:h-[45px] sm:w-[45px] transition-all cursor-pointer hover:scale-110 hover:-translate-y-1 border border-[#1e3a5f]`}
+            ></div>
+          ))}
+        </div>
+      </div>
+
+      {/* Routine */}
+      <div
+        className="
+        bg-[#07111f]/90
+        border border-[#1e3a5f]
+        backdrop-blur-xl
+        rounded-2xl
+        shadow-[0_0_20px_rgba(37,99,235,0.08)]
+        transition-all duration-300
+        hover:border-blue-500/40
+        hover:shadow-[0_0_30px_rgba(59,130,246,0.18)]
+        flex-1 overflow-y-auto p-5
+      "
+      >
+        <Routine
+          selectedHabits={selectedHabits}
+          setSelectedHabits={setSelectedHabits}
+          setPage={setPage}
+          completedHabits={completedHabits}
+          setCompletedHabits={setCompletedHabits}
+        />
+      </div>
+    </div>
+
+    {/* RIGHT */}
+    <div className="flex flex-col gap-4 lg:h-full overflow-hidden relative z-10">
+
+      {/* Streak */}
+      <div
+        className="
+        bg-[#07111f]/90
+        border border-[#1e3a5f]
+        backdrop-blur-xl
+        rounded-2xl
+        shadow-[0_0_20px_rgba(37,99,235,0.08)]
+        transition-all duration-300
+        hover:border-blue-500/40
+        hover:shadow-[0_0_30px_rgba(59,130,246,0.18)]
+        p-5 flex-1
+      "
+      >
+        <p className="text-2xl mb-5 text-blue-400 font-bold">
+          🏆 Streak
+        </p>
+
+        <div className="space-y-4">
+
+          <div className="bg-[#0f172a] p-4 rounded-xl border border-orange-500/30">
+            <p className="text-gray-300 text-sm uppercase tracking-wider mb-1">
+              Current Streak
+            </p>
+
+            <p className="text-3xl font-bold flex items-center gap-2">
+              🔥 {currentStreak}
+
+              <span className="text-lg font-normal text-gray-400">
+                {currentStreak === 1 ? "day" : "days"}
+              </span>
+            </p>
+          </div>
+
+          <div className="bg-[#0f172a] p-4 rounded-xl border border-yellow-500/30">
+            <p className="text-gray-300 text-sm uppercase tracking-wider mb-1">
+              Best Streak
+            </p>
+
+            <p className="text-3xl font-bold flex items-center gap-2">
+              ⭐ {bestStreak}
+
+              <span className="text-lg font-normal text-gray-400">
+                {bestStreak === 1 ? "day" : "days"}
+              </span>
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      {/* Weekly Progress */}
+      <div
+        className="
+        bg-[#07111f]/90
+        border border-[#1e3a5f]
+        backdrop-blur-xl
+        rounded-2xl
+        shadow-[0_0_20px_rgba(37,99,235,0.08)]
+        transition-all duration-300
+        hover:border-blue-500/40
+        hover:shadow-[0_0_30px_rgba(59,130,246,0.18)]
+        p-5 flex-1 lg:max-h-[50%] flex flex-col
+      "
+      >
+        <p className="text-2xl mb-4 text-blue-400 font-bold">
+          🎯 Weekly Progress
+        </p>
+
+        <div className="space-y-2 flex-1 overflow-y-auto pr-2 custom-scrollbar">
+          {weekDates.map((date, i) => {
+            const dateStr = date.toDateString();
+
+            const dayName = date.toLocaleDateString("en-US", {
+              weekday: "long",
+            });
+
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            const isFuture = date.getTime() > today.getTime();
+            const isToday = date.getTime() === today.getTime();
+
+            let icon = (
+              <span className="text-gray-500 animate-pulse">
+                ⏳
+              </span>
+            );
+
+            let bgClass = "bg-[#0f172a] border border-[#1e293b]";
+
+            if (!isFuture) {
+              const historyDay = habitHistory[dateStr];
+
+              const isCompleted =
+                historyDay && historyDay.completed > 0;
+
+              if (isCompleted) {
+                icon = <span>✅</span>;
+
+                bgClass =
+                  "bg-green-500/10 border border-green-500/30";
+              } else if (isToday) {
+                icon = (
+                  <span className="text-blue-400 animate-bounce block">
+                    👇
+                  </span>
+                );
+
+                bgClass =
+                  "bg-blue-500/10 border border-blue-500/30";
+              } else {
+                icon = <span>❌</span>;
+
+                bgClass =
+                  "bg-red-500/10 border border-red-500/30";
+              }
+            }
+
+            return (
+              <div
+                key={i}
+                className={`flex justify-between items-center px-4 py-3 rounded-xl transition-all ${bgClass}`}
+              >
+                <span
+                  className={`font-medium ${
+                    isToday
+                      ? "text-blue-400 font-bold"
+                      : ""
+                  }`}
+                >
+                  {dayName}
+                </span>
+
+                <div className="text-xl bg-black/40 w-10 h-10 rounded-full flex items-center justify-center shadow-inner">
+                  {icon}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
 }
 
 export default Hero;
