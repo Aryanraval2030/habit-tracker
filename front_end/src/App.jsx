@@ -99,7 +99,7 @@ function App() {
 
   return (
     <div className="font-serif min-h-screen">
-     {page === "loading" && <HeroSkeleton />}
+      {page === "loading" && <HeroSkeleton />}
       {page === "register" && (
         <UserRegister
           setPage={setPage}
@@ -126,10 +126,10 @@ function App() {
           setHabitHistory={setHabitHistory}
         />
       )}
-<p className="text-center text-gray-400 bg-black py-3 text-sm">
-  Developed by Aryan Raval
-</p>    </div>
-
+      <p className="text-center text-gray-400 bg-black py-3 mt-[5vh] text-sm">
+        Developed by Aryan Raval
+      </p>{" "}
+    </div>
   );
 }
 
