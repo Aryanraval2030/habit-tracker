@@ -3,6 +3,7 @@ import "./App.css";
 import UserRegister from "./UserRegister";
 import Hero from "./pages/Hero";
 import AddHabits from "./pages/AddHabits";
+import HeroSkeleton from "./components/HeroSkeleton";
 
 export const API_URL = "https://habit-tracker-cmun.onrender.com/api";
 
@@ -25,11 +26,11 @@ function App() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await fetch(`${API_URL}/me`, { 
-          credentials: "include",
+        const res = await fetch(`${API_URL}/me`, {
+          // credentials: "include",
           headers: {
-            "Authorization": `Bearer ${localStorage.getItem("token")}`
-          }
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         });
         if (res.ok) {
           const user = await res.json();
@@ -75,11 +76,11 @@ function App() {
         try {
           await fetch(`${API_URL}/update-habits`, {
             method: "POST",
-            headers: { 
+            headers: {
               "Content-Type": "application/json",
-              "Authorization": `Bearer ${localStorage.getItem("token")}`
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
-            credentials: "include",
+            // credentials: "include",
             body: JSON.stringify({
               selectedHabits,
               completedHabits,
@@ -98,11 +99,7 @@ function App() {
 
   return (
     <div className="font-serif min-h-screen">
-      {page === "loading" && (
-        <div className="flex justify-center items-center h-screen bg-black text-white text-2xl">
-          Loading Data...
-        </div>
-      )}
+     {page === "loading" && <HeroSkeleton />}
       {page === "register" && (
         <UserRegister
           setPage={setPage}
