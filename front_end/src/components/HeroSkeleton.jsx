@@ -1,11 +1,10 @@
 const HeroSkeleton = () => {
   return (
-    <div className="animate-pulse min-h-screen bg-black p-4">
-      <div className="grid grid-cols-12 gap-4">
-        
-        {/* Left */}
-        <div className="col-span-3 space-y-4">
-          <div className="bg-[#111] border border-purple-900 rounded-2xl p-4 h-[340px]">
+    <div className="animate-pulse min-h-screen bg-black p-3 md:p-4">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+        {/* LEFT */}
+        <div className="lg:col-span-3 space-y-4">
+          <div className="bg-[#111] border border-purple-900 rounded-2xl p-4 h-auto lg:h-[340px]">
             <div className="h-6 w-40 bg-[#222] rounded mb-6"></div>
 
             <div className="space-y-4">
@@ -15,7 +14,7 @@ const HeroSkeleton = () => {
             </div>
           </div>
 
-          <div className="bg-[#111] border border-purple-900 rounded-2xl p-4 h-[280px]">
+          <div className="bg-[#111] border border-purple-900 rounded-2xl p-4 h-auto lg:h-[280px]">
             <div className="h-6 w-44 bg-[#222] rounded mb-6"></div>
 
             <div className="space-y-3">
@@ -27,25 +26,26 @@ const HeroSkeleton = () => {
           </div>
         </div>
 
-        {/* Center */}
-        <div className="col-span-6">
-          <div className="bg-[#111] rounded-2xl h-[430px] p-4 border border-[#222]">
-            <div className="h-8 w-40 bg-[#222] rounded mx-auto mb-12"></div>
+        {/* CENTER */}
+        <div className="lg:col-span-6">
+          <div className="bg-[#111] rounded-2xl border border-[#222] p-4 min-h-[430px]">
+            <div className="h-8 w-40 bg-[#222] rounded mx-auto mb-10"></div>
 
-            <div className="grid grid-cols-8 gap-3 px-10">
+            <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-3 place-items-center">
               {Array.from({ length: 32 }).map((_, i) => (
                 <div
                   key={i}
-                  className="h-12 w-12 rounded bg-[#1a1a1a]"
+                  className="h-10 w-10 md:h-12 md:w-12 rounded bg-[#1a1a1a]"
                 ></div>
               ))}
             </div>
           </div>
 
-          <div className="bg-[#111] mt-4 rounded-2xl h-[220px] border border-[#222] p-4">
+          <div className="bg-[#111] mt-4 rounded-2xl border border-[#222] p-4 min-h-[220px]">
             <div className="h-6 w-48 bg-[#222] rounded mb-8"></div>
 
             <div className="space-y-4">
+              <div className="h-5 bg-[#1a1a1a] rounded"></div>
               <div className="h-5 bg-[#1a1a1a] rounded"></div>
               <div className="h-5 bg-[#1a1a1a] rounded"></div>
               <div className="h-5 bg-[#1a1a1a] rounded"></div>
@@ -53,9 +53,9 @@ const HeroSkeleton = () => {
           </div>
         </div>
 
-        {/* Right */}
-        <div className="col-span-3 space-y-4">
-          <div className="bg-[#111] rounded-2xl h-[320px] border border-yellow-800 p-4">
+        {/* RIGHT */}
+        <div className="lg:col-span-3 space-y-4">
+          <div className="bg-[#111] rounded-2xl border border-yellow-800 p-4 h-auto lg:h-[320px]">
             <div className="h-6 w-32 bg-[#222] rounded mb-8"></div>
 
             <div className="space-y-4">
@@ -64,7 +64,7 @@ const HeroSkeleton = () => {
             </div>
           </div>
 
-          <div className="bg-[#111] rounded-2xl h-[290px] border border-pink-900 p-4">
+          <div className="bg-[#111] rounded-2xl border border-pink-900 p-4 h-auto lg:h-[290px]">
             <div className="h-6 w-40 bg-[#222] rounded mb-8"></div>
 
             <div className="space-y-4">

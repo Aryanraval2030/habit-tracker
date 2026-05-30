@@ -27,7 +27,7 @@ function UserRegister({
     if (!isLogin && userForm.name === "") {
       return alert("Enter name");
     }
-    
+
     if (userForm.password === "") {
       return alert("Enter password");
     }
@@ -99,60 +99,88 @@ function UserRegister({
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-      <div className="shadow-[0_0_8px_rgba(255,255,255,0.6)] bg-[rgba(255,255,255,0.6)] w-full max-w-md p-6 rounded-2xl">
-        <h2 className="text-2xl text-black font-bold text-center mb-2">
-          Welcome to habit-tracker
-        </h2>
+    <div className="min-h-screen flex items-center justify-center bg-black px-4 relative overflow-hidden">
+      {/* background glow */}
+      <div className="absolute top-[-120px] left-[-120px] w-[300px] h-[300px] bg-blue-600/20 blur-3xl rounded-full"></div>
 
-        <p className="text-center text-gray-800 mb-5 font-medium">
-          {isLogin ? "Login to your account" : "Create your account"}
+      <div className="absolute bottom-[-120px] right-[-120px] w-[300px] h-[300px] bg-purple-600/20 blur-3xl rounded-full"></div>
+
+      {/* card */}
+      <div className="relative z-10 w-full max-w-md rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-[0_0_40px_rgba(59,130,246,0.15)] p-8">
+        {/* top badge */}
+        <div className="flex justify-center mb-5">
+          <div className="px-4 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium">
+            Habit Tracker
+          </div>
+        </div>
+
+        {/* heading */}
+        <h1 className="text-4xl font-bold text-center text-white mb-2">
+          {isLogin ? "Welcome Back" : "Create Account"}
+        </h1>
+
+        <p className="text-center text-gray-400 mb-8">
+          {isLogin
+            ? "Login and continue your habit journey"
+            : "Start building better habits today"}
         </p>
 
-        <form
-          autoComplete="off"
-          onSubmit={handleChange}
-          className="flex flex-col gap-4"
-        >
+        {/* form */}
+        <form autoComplete="off" onSubmit={handleChange} className="space-y-5">
           {!isLogin && (
-            <input
-              type="text"
-              placeholder="Name"
-              onChange={inputData}
-              name="name"
-              autoComplete="off"
-              value={userForm.name}
-              className="shadow-[0_0_10px_rgba(168,85,247,0.3)] border-none text-white w-full border p-3 rounded-lg mb-3 bg-black"
-            />
+            <div>
+              <label className="text-sm text-gray-300 mb-2 block">
+                Full Name
+              </label>
+
+              <input
+                type="text"
+                placeholder="Enter your name"
+                onChange={inputData}
+                name="name"
+                value={userForm.name}
+                className="w-full bg-[#111827] border border-[#1f2937] focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all duration-300 text-white rounded-xl px-4 py-3"
+              />
+            </div>
           )}
 
-          <input
-            type="password"
-            placeholder="Password"
-            onChange={inputData}
-            autoComplete="new-password"
-            name="password"
-            value={userForm.password}
-            className="shadow-[0_0_10px_rgba(168,85,247,0.3)] border-none text-white w-full border p-3 rounded-lg mb-3 bg-black"
-          />
+          <div>
+            <label className="text-sm text-gray-300 mb-2 block">Password</label>
 
+            <input
+              type="password"
+              placeholder="Enter password"
+              onChange={inputData}
+              name="password"
+              value={userForm.password}
+              className="w-full bg-[#111827] border border-[#1f2937] focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all duration-300 text-white rounded-xl px-4 py-3"
+            />
+
+            <p className="text-xs text-gray-500 mt-2">Minimum 8 characters</p>
+          </div>
+
+          {/* button */}
           <button
-            className="w-full bg-blue-950 text-white font-bold py-3 rounded-lg hover:bg-blue-900 transition-colors"
+            className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:scale-[1.02] hover:shadow-[0_0_25px_rgba(59,130,246,0.4)] transition-all duration-300 text-white font-semibold py-3 rounded-xl"
             type="submit"
           >
-            {isLogin ? "Login" : "Register"}
+            {isLogin ? "Login" : "Create Account"}
           </button>
         </form>
 
-        <p className="text-center text-black mt-4 font-medium">
-          {isLogin ? "Don't have an account? " : "Already have an account? "}
-          <button
-            onClick={() => setIsLogin(!isLogin)}
-            className="text-blue-900 font-bold hover:underline"
-          >
-            {isLogin ? "Register" : "Login"}
-          </button>
-        </p>
+        {/* footer */}
+        <div className="mt-7 text-center">
+          <p className="text-gray-400">
+            {isLogin ? "Don't have an account?" : "Already have an account?"}
+
+            <button
+              onClick={() => setIsLogin(!isLogin)}
+              className="ml-2 text-blue-400 hover:text-blue-300 font-semibold transition-colors"
+            >
+              {isLogin ? "Register" : "Login"}
+            </button>
+          </p>
+        </div>
       </div>
     </div>
   );
