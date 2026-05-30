@@ -8,9 +8,9 @@ const HeroSkeleton = () => {
             <div className="h-6 w-40 bg-[#6c308f] rounded mb-6"></div>
 
             <div className="space-y-4">
-              <div className="h-14 bg-[#1a1a1a] rounded-xl"></div>
-              <div className="h-14 bg-[#1a1a1a] rounded-xl"></div>
-              <div className="h-14 bg-[#1a1a1a] rounded-xl"></div>
+              <div className="h-14 bg-[#6c308f] rounded-xl"></div>
+              <div className="h-14 bg-[#6c308f] rounded-xl"></div>
+              <div className="h-14 bg-[#6c308f] rounded-xl"></div>
             </div>
           </div>
 
@@ -18,10 +18,10 @@ const HeroSkeleton = () => {
             <div className="h-6 w-44 bg-[#6c308f] rounded mb-6"></div>
 
             <div className="space-y-3">
-              <div className="h-12 bg-[#1a1a1a] rounded-xl"></div>
-              <div className="h-12 bg-[#1a1a1a] rounded-xl"></div>
-              <div className="h-12 bg-[#1a1a1a] rounded-xl"></div>
-              <div className="h-12 bg-[#1a1a1a] rounded-xl"></div>
+              <div className="h-12 bg-[#6c308f] rounded-xl"></div>
+              <div className="h-12 bg-[#6c308f] rounded-xl"></div>
+              <div className="h-12 bg-[#6c308f] rounded-xl"></div>
+              <div className="h-12 bg-[#6c308f] rounded-xl"></div>
             </div>
           </div>
         </div>
@@ -45,10 +45,10 @@ const HeroSkeleton = () => {
             <div className="h-6 w-48 bg-[#6c308f] rounded mb-8"></div>
 
             <div className="space-y-4">
-              <div className="h-5 bg-[#1a1a1a] rounded"></div>
-              <div className="h-5 bg-[#1a1a1a] rounded"></div>
-              <div className="h-5 bg-[#1a1a1a] rounded"></div>
-              <div className="h-5 bg-[#1a1a1a] rounded"></div>
+              <div className="h-5 bg-[#6c308f] rounded"></div>
+              <div className="h-5 bg-[#6c308f] rounded"></div>
+              <div className="h-5 bg-[#6c308f] rounded"></div>
+              <div className="h-5 bg-[#6c308f] rounded"></div>
             </div>
           </div>
         </div>
@@ -59,8 +59,8 @@ const HeroSkeleton = () => {
             <div className="h-6 w-32 bg-[#6c308f] rounded mb-8"></div>
 
             <div className="space-y-4">
-              <div className="h-24 rounded-xl bg-[#1a1a1a]"></div>
-              <div className="h-24 rounded-xl bg-[#1a1a1a]"></div>
+              <div className="h-24 rounded-xl bg-[#6c308f]"></div>
+              <div className="h-24 rounded-xl bg-[#6c308f]"></div>
             </div>
           </div>
 
@@ -68,9 +68,9 @@ const HeroSkeleton = () => {
             <div className="h-6 w-40 bg-[#6c308f] rounded mb-8"></div>
 
             <div className="space-y-4">
-              <div className="h-14 rounded-xl bg-[#1a1a1a]"></div>
-              <div className="h-14 rounded-xl bg-[#1a1a1a]"></div>
-              <div className="h-14 rounded-xl bg-[#1a1a1a]"></div>
+              <div className="h-14 rounded-xl bg-[#6c308f]"></div>
+              <div className="h-14 rounded-xl bg-[#6c308f]"></div>
+              <div className="h-14 rounded-xl bg-[#6c308f]"></div>
             </div>
           </div>
         </div>
