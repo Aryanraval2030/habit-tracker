@@ -6,7 +6,11 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 export const authMiddleware = (req, res, next) => {
   let token = req.cookies.token;
-  if (!token && req.headers.authorization && req.headers.authorization.startsWith("Bearer ")) {
+  if (
+    !token &&
+    req.headers.authorization &&
+    req.headers.authorization.startsWith("Bearer ")
+  ) {
     token = req.headers.authorization.split(" ")[1];
   }
 

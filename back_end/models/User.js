@@ -1,19 +1,21 @@
 import mongoose, { Schema } from "mongoose";
 
 const userSchema = new mongoose.Schema({
+  // for register
   name: String,
-  email: { type: String, unique: true },
   password: String,
-  // plainPassword: String, // Added to allow viewing password as requested
-  // habits state mapped from user requirements
+
+  // fore add custom habits
   selectedHabits: {
     selected: [Number],
     custom: [{ title: String, time: String }],
   },
+
+  // for given habits add
   completedHabits: {
     date: String,
     default: [Number],
-    custom: [Number], // indexes
+    custom: [Number],
   },
   habitHistory: { type: mongoose.Schema.Types.Mixed, default: {} },
 });

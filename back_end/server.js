@@ -16,10 +16,7 @@ app.use("/api", router);
 const serverRun = async () => {
   try {
     await connectDb();
-    // frontend usually runs on 5173, so allowing origin.
-
-    // const JWT_SECRET = "super_secret_jwt_key_habit_tracker_2030";
-
+  
     // Server start
     app.listen(process.env.PORT, () => {
       console.log("Server running");
