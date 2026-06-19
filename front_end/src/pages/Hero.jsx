@@ -164,7 +164,7 @@ function Hero({
     <div className="bg-black text-white min-h-screen flex flex-col lg:grid lg:grid-cols-[1fr_2fr_1fr] gap-4 p-4 lg:h-screen lg:overflow-hidden px-[5px] font-serif">
       {/* LEFT */}
       <div className="flex flex-col gap-4 lg:h-full overflow-hidden">
-        <div className="shadow-[0_0_15px_rgba(168,85,247,0.2)] bg-black/40 border border-purple-500/20 backdrop-blur-md rounded-2xl p-5 flex-1 transition-transform hover:scale-[1.01]">
+        <div className="shadow-[0_0_15px_rgba(168,85,247,0.2)] bg-black/40 border border-purple-500/20 backdrop-blur-md rounded-2xl p-5 flex-1 transition-transform ">
           {/* Analytics */}
           <h2 className="text-2xl mb-4 text-purple-400 font-bold">
             📊 Today Analytics
@@ -192,7 +192,7 @@ function Hero({
           </p>
         </div>
 
-        <div className="shadow-[0_0_15px_rgba(168,85,247,0.2)] bg-black/40 border border-purple-500/20 backdrop-blur-md rounded-2xl p-5 flex-1 lg:max-h-[50%] flex flex-col transition-transform hover:scale-[1.01]">
+        <div className="shadow-[0_0_15px_rgba(168,85,247,0.2)] bg-black/40 border border-purple-500/20 backdrop-blur-md rounded-2xl p-5 flex-1 lg:max-h-[50%] flex flex-col transition-transform ">
           {/* History */}
           <p className="text-2xl mb-4 text-purple-400 font-bold">
             📅 Weekly History
@@ -238,7 +238,7 @@ function Hero({
 
       {/* CENTER */}
       <div className="flex flex-col gap-4 lg:h-full overflow-hidden order-first lg:order-none">
-        <div className="shadow-[0_0_15px_rgba(59,130,246,0.2)] bg-black/40 border border-blue-500/20 backdrop-blur-md rounded-2xl p-5 flex-none transition-transform hover:scale-[1.01]">
+        <div className="shadow-[0_0_15px_rgba(59,130,246,0.2)] bg-black/40 border border-blue-500/20 backdrop-blur-md rounded-2xl p-5 flex-none transition-transform ">
           <div className="flex justify-end gap-3 mb-2 items-center text-xs text-gray-400">
             <p>less</p>
             <div className="w-4 h-4 rounded-sm bg-white/10"></div>
@@ -268,7 +268,7 @@ function Hero({
           </div>
         </div>
 
-        <div className="shadow-[0_0_15px_rgba(34,197,94,0.2)] bg-black/40 border border-green-500/20 backdrop-blur-md rounded-2xl flex-1 overflow-y-auto p-5 transition-transform hover:scale-[1.01]">
+        <div className="shadow-[0_0_15px_rgba(34,197,94,0.2)] bg-black/40 border border-green-500/20 backdrop-blur-md rounded-2xl flex-1 overflow-y-auto p-5 transition-transform ">
           <Routine
             selectedHabits={selectedHabits}
             setSelectedHabits={setSelectedHabits}
@@ -281,7 +281,7 @@ function Hero({
 
       {/* RIGHT */}
       <div className="flex flex-col gap-4 lg:h-full overflow-hidden">
-        <div className="shadow-[0_0_15px_rgba(234,179,8,0.2)] bg-black/40 border border-yellow-500/20 backdrop-blur-md rounded-2xl p-5 flex-1 transition-transform hover:scale-[1.01]">
+        <div className="shadow-[0_0_15px_rgba(234,179,8,0.2)] bg-black/40 border border-yellow-500/20 backdrop-blur-md rounded-2xl p-5 flex-1 transition-transform ">
           <p className="text-2xl mb-5 text-yellow-400 font-bold">🏆 Streak</p>
 
           <div className="space-y-4">
@@ -311,7 +311,7 @@ function Hero({
           </div>
         </div>
 
-        <div className="shadow-[0_0_15px_rgba(168,85,247,0.2)] bg-black/40 border border-purple-500/20 backdrop-blur-md rounded-2xl p-5 flex-1 lg:max-h-[50%] flex flex-col transition-transform hover:scale-[1.01]">
+        <div className="shadow-[0_0_15px_rgba(168,85,247,0.2)] bg-black/40 border border-purple-500/20 backdrop-blur-md rounded-2xl p-5 flex-1 lg:max-h-[50%] flex flex-col transition-transform ">
           <p className="text-2xl mb-4 text-purple-400 font-bold">
             🎯 Weekly Progress
           </p>
